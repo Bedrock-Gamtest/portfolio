@@ -49,7 +49,7 @@ export class Database {
    */
   get data() {
     if (this.fetched) return this.MEMORY;
-    const data = JSON.parse(world.getDynamicProperty(this.TABLE_NAME) ?? {});
+    const data = JSON.parse(world.getDynamicProperty(this.TABLE_NAME) ?? "{}");
     this.MEMORY = data;
     this.fetched = true;
     return data;
