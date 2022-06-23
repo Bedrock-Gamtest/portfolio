@@ -6,16 +6,20 @@ import { world } from "mojang-minecraft";
  * @param {string} player Player you want to broadcast to
  * @param {Array<string>} with_ lang arguments
  * @returns {any} For commands that return data, returns a JSON structure with command response values.
- * @example broadcast('Hello World!');
+ * @example 
+ * broadcast('Hello World!');
+ * broadcast('Hello World!',"@a[tag=smelly]");
+ * broadcast('Hello World!',"@r[tag=hi]");
  */
-function broadcast(text, player, args = []) {
+export function broadcast(text, player, args = []) {
   try {
+    const query = player.match(/\(@"|\").+\"/g) ? player:'"'+player+'"';
     args = args.map(String).filter((n) => n);
     return world
       .getDimension("overworld")
       .runCommand(
         `tellraw ${
-          player ? `"${player}"` : "@a"
+          player ? `${query}` : "@a"
         } {"rawtext":[{"translate":"${text}","with":${JSON.stringify(args)}}]}`
       );
   } catch (error) {
