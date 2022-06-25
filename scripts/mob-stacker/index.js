@@ -32,6 +32,7 @@ const STACKABLE_MOBS = [
   "mushroomcow",
   "minecraft:panda",
   "minecraft:pig",
+  "minecraft:bat"
 ];
 
 /**
